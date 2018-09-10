@@ -10,22 +10,35 @@ var users  = require('./routes/users');
 
 var app = express();
 
-// view engine setup
+// 设置模板解析引擎
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+
+// morgan HTTP请求日志记录器中间件
 app.use(logger('dev'));
+
+
+/*
+ * node 请求体提取中间件
+ */ 
+
+// parse application/json  以json传入
 app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded  以form形式传入
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// cookie-parser 的作用就是设置，获取和删除 cookie
 app.use(cookieParser());
+
+// 静态资源加载
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 路由path 对应不同的处理逻辑
 app.use('/', routes);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
+// 捕获404错误
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

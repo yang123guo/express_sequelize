@@ -14,18 +14,21 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+
+// 将返回一个包含“指定目录下所有文件名称”对象组成的数组  同步读取
 fs
   .readdirSync(__dirname)
   .filter(file => {
+    // 返回除了basename的文件对象 数组
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
     var model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
+    db[model.name] = model; // 给db对象拓展 key为name  value为model对象
   });
 
 Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
+  if (db[modelName].associate) { // 如果对象db下有associate 属性，那么执行associate()连接功能
     db[modelName].associate(db);
   }
 });
