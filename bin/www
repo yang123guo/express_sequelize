@@ -13,7 +13,7 @@ var models = require('../models');
  * 通过环境获取端口并设置端口.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3003');
 app.set('port', port);
 
 /**
@@ -33,7 +33,7 @@ models.sequelize.sync().then(function () {
 });
 
 /**
- * Normalize a port into a number, string, or false.
+ * 格式化端口为一个： number, string, or false.
  */
 
 function normalizePort(val) {
