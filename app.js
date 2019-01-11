@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users  = require('./routes/users');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -21,7 +21,7 @@ app.use(logger('dev'));
 
 /*
  * node 请求体提取中间件
- */ 
+ */
 
 // parse application/json  以json传入
 app.use(bodyParser.json());
@@ -39,20 +39,20 @@ app.use('/', routes);
 app.use('/users', users);
 
 // 捕获404错误
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-// error handler
-// no stacktraces leaked to user unless in development environment
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
-  });
+// 错误处理
+// 除非在开发环境中，否则不会向用户泄漏错误堆栈
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: (app.get('env') === 'development') ? err : {}
+    });
 });
 
 
