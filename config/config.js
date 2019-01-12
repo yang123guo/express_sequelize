@@ -16,8 +16,8 @@ module.exports = {
         pool: {
             max: 5, // 最大连接数
             min: 0, // 最小连接数
-            acquire: 30000,
-            idle: 10000
+            acquire: 30000, //
+            idle: 10000 // 空置时间，超时会自动释放连接
         }
     },
     test: {
