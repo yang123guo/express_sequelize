@@ -11,11 +11,12 @@ var db = {};
 if (config.use_env_variable) { // 如果config的某项有use_env_variable键
     var sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else { // 没有use_env_variable键
-    var sequelize = new Sequelize(config.database, config.username, config.password, config);
+    var sequelize = new Sequelize(config);
 }
 
 
 // 将返回一个包含“指定目录下所有文件名称”对象组成的数组  同步读取
+/*
 fs
     .readdirSync(__dirname)
     .filter(file => {
@@ -32,7 +33,7 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-
+*/
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
