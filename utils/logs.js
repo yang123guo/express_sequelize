@@ -1,3 +1,4 @@
+// 封装console含颜色的功能
 const chalk = require('chalk');
 
 const color = {
